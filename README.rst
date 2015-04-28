@@ -48,4 +48,4 @@ cli example:
 
 ./fastFM-core/bin/fastfm data/train_regression data/test_regression --task regression --init-var=0.11 --n-iter=123 --solver='mcmc' --rank 7 --l2-reg=.22
 
-test private release 2
+test private release 3
