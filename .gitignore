@@ -1,0 +1,21 @@
+# C
+*.swp
+*.o
+*.a
+*.so
+*.zip
+src/tests/test_ffm_als_mcmc
+src/tests/test_ffm_utils
+src/tests/test_ffm_sgd
+bin/
+demo/data/ranking_predictions
+dense_fm
+sparse_fm
+cli
+# latex
+*.aux
+*.bbl
+*.blg
+*.dvi
+*.log
+*.toc

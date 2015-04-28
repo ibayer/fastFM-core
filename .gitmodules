@@ -1,0 +1,4 @@
+[submodule "externals/CXSparse"]
+	path = externals/CXSparse
+	url = https://github.com/ibayer/CXSparse.git
+
