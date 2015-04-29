@@ -37,8 +37,8 @@ void sgd_regression_example()
     cs *X_t = cs_transpose (X, 1);
 
     ffm_param param = {.n_iter=2000, .init_sigma=.01,
-        .lambda_w=0.5, .lambda_V=0.5,
-        .stepsize=.002, .TASK=TASK_REGRESSION};
+                       .init_lambda_w=0.5, .init_lambda_V=0.5,
+                       .stepsize=.002, .TASK=TASK_REGRESSION};
     // allocate fm parameter
     double  w_0 = 0;
     double w[2];

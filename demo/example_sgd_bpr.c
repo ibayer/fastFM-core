@@ -49,7 +49,7 @@ void sgd_bpr_example()
     cs *X_t = cs_transpose (X, 1);
 
     ffm_param param = {.n_iter=2000, .k=k, .init_sigma=.01,
-        .lambda_w=.5, .lambda_V=.5,
+        .init_lambda_w=.5, .init_lambda_V=.5,
         .stepsize=0.002, .TASK=TASK_RANKING};
     // allocate fm parameter
     double  w_0 = 0;

@@ -35,8 +35,15 @@ void als_regression_example()
     double y[] = {298, 266, 29, 298, 848};
     cs * X = create_design_matrix();
 
+    // allocate space for all hyper-parameter
+    int w_groups = 1;
+    int n_hyper_param = 1 + 2 * k + 2 * w_groups;
+    double hyper_param[7]; // 7 = n_hyper_param
+
     ffm_param param = {.n_iter=1000, .k=k, .init_sigma=0.1,
-        .TASK=TASK_REGRESSION, .lambda_w=1, .lambda_V=1};
+                       .TASK=TASK_REGRESSION, .init_lambda_w=1,
+                       .init_lambda_V=1, .hyper_param=hyper_param,
+                       .n_hyper_param=n_hyper_param};
     // allocate fm parameter
     double  w_0 = 0;
     double w[2];
@@ -68,8 +75,15 @@ void mcmc_regression_example()
     double y[] = {298, 266, 29, 298, 848};
     cs * X = create_design_matrix();
 
+    // allocate space for all hyper-parameter
+    int w_groups = 1;
+    int n_hyper_param = 1 + 2 * k + 2 * w_groups;
+    double hyper_param[7]; // 7 = n_hyper_param
+
     ffm_param param = {.n_iter=1000, .k=k, .init_sigma=0.1,
-    .TASK=TASK_REGRESSION, .lambda_w=1, .lambda_V=1};
+                       .TASK=TASK_REGRESSION, .init_lambda_w=1,
+                       .init_lambda_V=1, .hyper_param=hyper_param,
+                       .n_hyper_param=n_hyper_param};
     // allocate fm parameter
     double  w_0 = 0;
     double w[2];

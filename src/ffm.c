@@ -132,7 +132,8 @@ void ffm_sgd_bpr_fit(double *w_0, double *w, double *V,
 
     // copy the last coef values back into the python memory
     *w_0 = coef.w_0;
-    ffm_vector_free_all(coef.lambda_V, coef.mu_V);
+    if ( param->k > 0 )
+        ffm_vector_free_all(coef.lambda_V, coef.mu_V);
 }
 
 void ffm_sgd_fit(double *w_0, double *w, double *V,
@@ -160,5 +161,6 @@ void ffm_sgd_fit(double *w_0, double *w, double *V,
 
     // copy the last coef values back into the python memory
     *w_0 = coef.w_0;
-    ffm_vector_free_all(coef.lambda_V, coef.mu_V);
+    if ( param->k > 0 )
+        ffm_vector_free_all(coef.lambda_V, coef.mu_V);
 }
