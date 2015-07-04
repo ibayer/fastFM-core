@@ -1,3 +1,6 @@
+A short paper describing the library is now available on 
+arXiv http://arxiv.org/abs/1505.00641
+
 GIT CLONE INSTRUCTION
 =====================
 This repository relays on sub-repositories just using ``git clone ..``
@@ -54,5 +57,3 @@ how to run tests
 cli example:
 
 ./fastFM-core/bin/fastfm data/train_regression data/test_regression --task regression --init-var=0.11 --n-iter=123 --solver='mcmc' --rank 7 --l2-reg=.22
-
-test private release 3
