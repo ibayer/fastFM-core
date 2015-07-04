@@ -22,6 +22,13 @@ this worked on ubuntu 14.04:
 ``sudo apt-get install libglib2.0-dev libatlas-base-dev``
 and for the testsuite also ``sudo apt-get install libgsl0-dev``
 
+Install on Windows / OSX
+========================
+It should be possible to compile the library on Windows and OSX.
+I'm developing on linux but have received multiple requests from people who
+want to run this library on other platforms.
+Please let me know about issues you ran into or how you manged to compile on
+other platfroms (or just open a PR) so that we include this information here.
 
 compile command line linterface
 ===============================
