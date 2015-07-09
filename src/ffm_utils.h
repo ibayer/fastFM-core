@@ -1,3 +1,6 @@
+// Author: Immanuel Bayer
+// License: BSD 3 clause
+
 #ifndef FFM_UTILS_H
 #define FFM_UTILS_H
 

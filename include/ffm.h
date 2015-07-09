@@ -1,3 +1,6 @@
+// Author: Immanuel Bayer
+// License: BSD 3 clause
+
 #ifndef FFM_H
 #define FFM_H
 #include "../externals/CXSparse/Include/cs.h"

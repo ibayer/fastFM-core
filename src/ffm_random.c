@@ -1,3 +1,6 @@
+// Author: Immanuel Bayer
+// License: BSD 3 clause
+
 #include "fast_fm.h"
 
 ffm_rng * ffm_rng_seed(int seed)

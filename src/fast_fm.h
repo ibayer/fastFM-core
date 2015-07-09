@@ -1,3 +1,6 @@
+// Author: Immanuel Bayer
+// License: BSD 3 clause
+
 #ifndef FAST_MF_H
 #define FAST_MF_H
 

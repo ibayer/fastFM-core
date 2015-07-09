@@ -1,3 +1,6 @@
+// Author: Immanuel Bayer
+// License: BSD 3 clause
+
 #ifndef FFM_RANDOM_H
 #define FFM_RANDOM_H
 
