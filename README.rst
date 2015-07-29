@@ -18,6 +18,7 @@ DEPENDENCIES
 * glib-2.0
 * CXSparse (included)
 * gsl 1.15-1 (only testsuite)
+* argp (included by default in Linux)
 
 install depenencies:
 -------------------
@@ -25,9 +26,15 @@ this worked on ubuntu 14.04:
 ``sudo apt-get install libglib2.0-dev libatlas-base-dev``
 and for the testsuite also ``sudo apt-get install libgsl0-dev``
 
-Install on Windows / OSX
+Install on OSX
+===============
+Library compiles on OSX (thus python interface works), however console interface doesn't.
+
+Recommended way to manage dependencies is [Homebrew package manager](https://brew.sh). If you have brew installed, dependencies can be installed by running command ``brew install glib gsl argp-standalone``.
+
+Install on Windows
 ========================
-It should be possible to compile the library on Windows and OSX.
+It should be possible to compile the library on Windows.
 I'm developing on linux but have received multiple requests from people who
 want to run this library on other platforms.
 Please let me know about issues you ran into or how you manged to compile on
