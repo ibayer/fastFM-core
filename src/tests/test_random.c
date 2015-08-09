@@ -356,30 +356,3 @@ int main(int argc, char** argv)
 
     return g_test_run();
 }
-
-/*
-int main(int argc, char** argv){
-	ffm_rng *kr;
-	long seed = time(NULL);
-	kr = ffm_rng_seed(seed);
-
-    int buckets[20] = {0};
-    int i, j;
-
-        for(i=0; i<500; i++) {
-        //double val = ffm_rand_normal(kr, 10.0, 3.0);
-        double val = ffm_rand_gamma(kr);
-        int i = (int)floor(val + 0.5);
-        if (i >= 0 && i < sizeof(buckets)/sizeof(*buckets))
-            buckets[i]++;
-    }
-    for(i=0; i<sizeof(buckets)/sizeof(*buckets); i++) {
-        for(j=0; j<buckets[i]; j++) {
-            printf("#");
-        }
-        printf("\n");
-    }
-	free(kr);
-    return 0;
-}
-*/
