@@ -199,10 +199,11 @@ void ffm_vector_make_labels(ffm_vector *y){
         else
             ffm_vector_set(y, i, -1);
 }
+int __cmpfunc_for_ffm_vector_sort(const void * a, const void * b){
+    return ( *(double*)a - *(double*)b );
+}
 void ffm_vector_sort(ffm_vector *y){
-   int cmpfunc (const void * a, const void * b)
-        {return ( *(double*)a - *(double*)b );}
-   qsort(y->data, y->size, sizeof(double), cmpfunc);
+   qsort(y->data, y->size, sizeof(double), __cmpfunc_for_ffm_vector_sort);
 }
 
 double ffm_vector_mean_squared_error(ffm_vector *a, ffm_vector *b){

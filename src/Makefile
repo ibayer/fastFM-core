@@ -1,7 +1,7 @@
 OBJECTS= kmath.o ffm_random.o ffm_als_mcmc.o ffm_utils.o ffm_sgd.o ffm.o  cli.o
-CFLAGS = `pkg-config --cflags glib-2.0` -fPIC -g -Wall -O3 -I/include -I./src -I../externals/CXSparse/Include
+CFLAGS = `pkg-config --cflags glib-2.0` -std=c99 -fPIC -g -Wall -O3 -I/include -I./src -I../externals/CXSparse/Include
 LDLIBS= `pkg-config --libs glib-2.0` -L../externals/CXSparse/Lib -lcxsparse -lcblas -latlas -lm
-CC=c99
+CC=gcc
 
 
 $(P): CFLAGS += -DTest_operations 
