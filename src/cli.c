@@ -175,10 +175,12 @@ static struct argp argp = { options, parse_opt, args_doc, doc };
 int
 main (int argc, char **argv)
 {
+    /*
     feenableexcept(FE_INVALID   | 
                    FE_DIVBYZERO | 
                    FE_OVERFLOW  | 
                    FE_UNDERFLOW);
+    */
 
        struct arguments arguments;
 

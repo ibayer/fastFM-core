@@ -780,10 +780,12 @@ void test_mcmc_warm_start(TestFixture_T* pFix, gconstpointer pg){
 
 int main(int argc, char** argv)
 {
+    /*
     feenableexcept(FE_INVALID   | 
                    FE_DIVBYZERO | 
                    FE_OVERFLOW  | 
                    FE_UNDERFLOW);
+    */
 
     g_test_init(&argc, &argv, NULL);
 
