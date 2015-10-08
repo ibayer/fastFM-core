@@ -44,7 +44,9 @@ void ffm_als_fit(double *w_0, double *w, double *V, cs *X, double *y,
 
     // copy the last coef values back into the python memory
     *w_0 = coef.w_0;
-    ffm_vector_free_all(coef.lambda_V, coef.mu_V);
+
+    if  (param->k > 0)
+        ffm_vector_free_all(coef.lambda_V, coef.mu_V);
 }
 
 
