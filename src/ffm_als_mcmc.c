@@ -3,8 +3,53 @@
 
 #include "fast_fm.h"
 
+void sparse_predict(ffm_coef * coef, cs * A, ffm_vector *y_pred){
 
-void sparse_predict(ffm_coef * coef, cs * X, ffm_vector *y_pred){
+    // y[:] = w_0
+    ffm_vector_set_all(y_pred, coef->w_0);
+    // y += Xw
+    if (coef->w) cs_gaxpy (A, coef->w->data, y_pred->data);
+
+    // check if second order interactions are used
+    if (!coef->V) return;
+
+    ffm_matrix *V = coef->V;
+    int k = V->size0;
+
+    int p, j, f, n, *Ap, *Ai ;
+    double *Ax ;
+    n = A->n ; Ap = A->p ; Ai = A->i ; Ax = A->x ;
+
+    ffm_vector *tmp = ffm_vector_alloc(A->m);
+    // over all k
+    for (f = 0; f < k; f++){
+
+        ffm_vector_set_all(tmp, 0);
+        // over all cols
+        for (j = 0 ; j < n ; j++)
+        {
+
+            // all nz in this column
+            // Ai[p] is the (row) position in the original matrix
+            // Ax[p] is the value at position Ai[p]
+            for (p = Ap [j] ; p < Ap [j+1] ; p++)
+            {
+                const int row = Ai [p];
+                const double tmp_v = ffm_matrix_get(V, f, j);
+                const double tmp_x = Ax[p];
+
+                tmp->data[row] += tmp_v * tmp_x;
+                y_pred->data[row] -= 0.5 * (tmp_x * tmp_x) * (tmp_v * tmp_v);
+            }
+        }
+        ffm_vector_mul(tmp, tmp);
+        ffm_blas_daxpy(0.5, tmp, y_pred);
+    }
+    ffm_vector_free(tmp);
+}
+
+
+void row_predict(ffm_coef * coef, cs * X, ffm_vector *y_pred){
 
     // y[:] = w_0
     ffm_vector_set_all(y_pred, coef->w_0);

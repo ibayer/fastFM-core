@@ -87,6 +87,21 @@ void test_sparse_predict(TestFixture_T* pFix, gconstpointer pg)
     ffm_vector_free(y_pred);
 }
 
+void test_row_predict(TestFixture_T* pFix, gconstpointer pg)
+{
+    ffm_vector * y_pred = ffm_vector_calloc(5);
+
+    row_predict(pFix->coef, pFix->X, y_pred);
+
+    g_assert_cmpfloat(298.0, ==, ffm_vector_get(y_pred,0));
+    g_assert_cmpfloat(266.0, ==, ffm_vector_get(y_pred,1));
+    g_assert_cmpfloat(29.0, ==, ffm_vector_get(y_pred,2));
+    g_assert_cmpfloat(298.0, ==, ffm_vector_get(y_pred,3));
+    g_assert_cmpfloat(848.0, ==, ffm_vector_get(y_pred,4));
+
+    ffm_vector_free(y_pred);
+}
+
 void test_sparse_als_zero_order_only(TestFixture_T* pFix, gconstpointer pg){
 
     int n_features = pFix->X->n;
@@ -820,6 +835,14 @@ int main(int argc, char** argv)
       &Fixture,
       TestFixtureContructorLong,
       test_sparse_predict,
+      TestFixtureDestructor
+      );
+
+    g_test_add("/general/row_predict",
+      TestFixture_T,
+      &Fixture,
+      TestFixtureContructorLong,
+      test_row_predict,
       TestFixtureDestructor
       );
 

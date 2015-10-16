@@ -72,6 +72,8 @@ void sparse_fit(ffm_coef * coef, cs *X, cs *X_test, ffm_vector *y,
         ffm_vector *y_pred, ffm_param param);
 void sparse_predict(ffm_coef * coef, cs *X, ffm_vector *y_pred);
 
+void row_predict(ffm_coef * coef, cs * A, ffm_vector *y_pred);
+
 // ############### internal functions for ALS / MCMC ####################
 
 int eval_second_order_term(ffm_matrix *V, cs * X, ffm_vector *result);
