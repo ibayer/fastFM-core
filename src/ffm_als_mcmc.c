@@ -53,8 +53,9 @@ void row_predict(ffm_coef * coef, cs * X, ffm_vector *y_pred){
 
     // y[:] = w_0
     ffm_vector_set_all(y_pred, coef->w_0);
+
     // y += Xw
-    if (coef->w) cs_gaxpy (X, coef->w->data, y_pred->data);
+    if (coef->w) Cs_row_gaxpy (X, coef->w->data, y_pred->data);
 
     // check if second order interactions are used
     if (!coef->V) return;
@@ -260,9 +261,8 @@ void map_update_target(ffm_vector *y_pred, ffm_vector *z_target,
     }
 }
 
-int eval_second_order_term(ffm_matrix *V, cs * X, ffm_vector *y){
+int eval_second_order_term(ffm_matrix *V, cs * A, ffm_vector *y){
     // operate on X.T
-    cs * A = cs_transpose (X, 1);
     int k = V->size0;
 
     int p, j, f, n, *Ap, *Ai ;
@@ -290,7 +290,6 @@ int eval_second_order_term(ffm_matrix *V, cs * X, ffm_vector *y){
             y->data[j] += 0.5 * (tmp_sum * tmp_sum);
         }
     }
-    cs_spfree (A) ;
     return (1) ;
 }
 

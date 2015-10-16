@@ -9,7 +9,7 @@ void test_eval_second_order_term(TestFixture_T* pFix, gconstpointer pg)
 {
 
     ffm_vector * y_pred = ffm_vector_calloc(5);
-    eval_second_order_term(pFix->coef->V, pFix->X, y_pred);
+    eval_second_order_term(pFix->coef->V, pFix->X_t, y_pred);
 
     g_assert_cmpfloat(240.0, ==, ffm_vector_get(y_pred,0));
     g_assert_cmpfloat(240.0, ==, ffm_vector_get(y_pred,1));
@@ -91,7 +91,7 @@ void test_row_predict(TestFixture_T* pFix, gconstpointer pg)
 {
     ffm_vector * y_pred = ffm_vector_calloc(5);
 
-    row_predict(pFix->coef, pFix->X, y_pred);
+    row_predict(pFix->coef, pFix->X_t, y_pred);
 
     g_assert_cmpfloat(298.0, ==, ffm_vector_get(y_pred,0));
     g_assert_cmpfloat(266.0, ==, ffm_vector_get(y_pred,1));
