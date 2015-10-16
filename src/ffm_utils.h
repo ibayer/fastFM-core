@@ -78,6 +78,10 @@ double ffm_r2_score(ffm_vector *y_true, ffm_vector *y_pred);
 
 double ffm_average_precision_at_cutoff(ffm_vector *y_true, ffm_vector *y_pred, int cutoff);
 
+// y = A*x+y
+// with A in RowMajor format.
+int Cs_row_gaxpy (const cs *A, const double *x, double *y);
+
 /* y = alpha*A[:,j]*x+y */
 int Cs_daxpy (const cs *A, int col_index, double alpha, const double *x,
         double *y);

@@ -629,6 +629,23 @@ int Cs_daxpy (const cs *A, int col_index, double alpha, const double *x, double 
     return (1) ;
 }
 
+// y = A*x+y
+// with A in RowMajor format.
+int Cs_row_gaxpy (const cs *A, const double *x, double *y)
+{
+    CS_INT p, j, n, *Ap, *Ai ;
+    CS_ENTRY *Ax ;
+    //if (!CS_CSC (A) || !x || !y) return (0) ;       /* check inputs */
+    n = A->n ; Ap = A->p ; Ai = A->i ; Ax = A->x ;
+    for (j = 0 ; j < n ; j++)
+    {
+        for (p = Ap [j] ; p < Ap [j+1] ; p++)
+        {
+            y [j] += Ax [p] * x [Ai [p]] ;
+        }
+    }
+    return (1) ;
+}
 
 /* y = alpha*A[:,j]+y */
 // A sparse, x, y dense

@@ -215,6 +215,41 @@ void test_Cs_daxpy(void){
 }
 
 
+void test_Cs_row_gaxpy(void){
+    // init X
+    int m = 5;
+    int n = 2;
+    cs *X = cs_spalloc (m, n, m*n, 1, 1) ;    /* create triplet identity matrix */
+    cs_entry(X, 0, 0, 6); cs_entry(X, 0, 1, 1);
+    cs_entry(X, 1, 0, 2); cs_entry(X, 1, 1, 3);
+    cs_entry(X, 2, 0, 3);
+    cs_entry(X, 3, 0, 6); cs_entry(X, 3, 1, 1);
+    cs_entry(X, 4, 0, 4); cs_entry(X, 4, 1, 5);
+    //printf ("X:\n") ; cs_print (X, 0) ; /* print A */
+    cs *X_csc = cs_compress (X) ;               /* A = compressed-column form of T */
+    cs * X_csr = cs_transpose (X_csc, 1);
+
+    ffm_vector *v = ffm_vector_alloc(2);
+    ffm_vector_set(v, 0, 2);
+    ffm_vector_set(v, 1, 3);
+
+    ffm_vector *res = ffm_vector_calloc(5);
+    ffm_vector_set(res, 1, 3);
+
+    ffm_vector *res_row = ffm_vector_calloc(5);
+    ffm_vector_set(res_row, 1, 3);
+
+    Cs_row_gaxpy(X_csr, v->data, res->data);
+    cs_gaxpy (X_csc, v->data, res_row->data);
+
+    g_assert_cmpfloat(ffm_vector_get(res_row, 0), ==, ffm_vector_get(res, 0));
+    g_assert_cmpfloat(ffm_vector_get(res_row, 1), ==, ffm_vector_get(res, 1));
+
+    cs_spfree (X_csc) ;
+    cs_spfree (X_csr) ;
+}
+
+
 void test_Cs_scal_apy(void){
     // init X
     int m = 5;
@@ -507,6 +542,7 @@ int main(int argc, char** argv)
             test_ffm_vector_update_mean);
     g_test_add_func("/utils/ffm_sigmoid ", test_ffm_sigmoid);
     g_test_add_func("/utils/cs daxpy", test_Cs_daxpy);
+    g_test_add_func("/utils/cs gaxpy row", test_Cs_row_gaxpy);
     g_test_add_func("/utils/cs scal_apy", test_Cs_scal_apy);
     g_test_add_func("/utils/cs scal_a2py", test_Cs_scal_a2py);
     g_test_add_func("/utils/cs col_norm", test_Cs_col_norm);
