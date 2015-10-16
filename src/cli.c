@@ -295,8 +295,14 @@ main (int argc, char **argv)
                 param);
 
         // the predictions are calculated during the training phase for mcmc
-        if (param.SOLVER != SOLVER_MCMC){
+        if (param.SOLVER == SOLVER_MCMC){
             sparse_predict(coef, test_data.X, y_test_predict);
+            if (param.TASK == TASK_CLASSIFICATION)
+                ffm_vector_normal_cdf(y_test_predict);
+        }
+
+        if (param.SOLVER == SOLVER_SGD){
+            row_predict(coef, test_data.X, y_test_predict);
             if (param.TASK == TASK_CLASSIFICATION)
                 ffm_vector_normal_cdf(y_test_predict);
         }

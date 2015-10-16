@@ -29,7 +29,7 @@ void test_first_order_sgd(TestFixture_T* pFix, gconstpointer pg){
         .stepsize=step_size, .SOLVER=SOLVER_SGD, .TASK=TASK_REGRESSION};
     param.init_lambda_w = 0.5;
     ffm_fit_sgd(coef, pFix->X_t, pFix->y, &param);
-    sparse_predict(coef, pFix->X, y_pred);
+    row_predict(coef, pFix->X_t, y_pred);
 
     g_assert_cmpfloat(ffm_r2_score(y_pred, pFix->y), > , .85);
 
@@ -39,7 +39,7 @@ void test_first_order_sgd(TestFixture_T* pFix, gconstpointer pg){
     .TASK=TASK_REGRESSION};
     param_als.init_lambda_w = 3.5;
     sparse_fit(coef_als, pFix->X, pFix->X, pFix->y, y_pred_als, param_als);
-    sparse_predict(coef_als, pFix->X, y_pred_als);
+    row_predict(coef_als, pFix->X_t, y_pred_als);
 
     // compare fit of als and sgd
     g_assert_cmpfloat(ffm_r2_score(y_pred, y_pred_als), > , .98);
@@ -66,7 +66,7 @@ void test_second_order_sgd(TestFixture_T* pFix, gconstpointer pg){
     param.init_lambda_w = 0.5;
     param.init_lambda_V = 50.5;
     ffm_fit_sgd(coef, pFix->X_t, pFix->y, &param);
-    sparse_predict(coef, pFix->X, y_pred);
+    row_predict(coef, pFix->X_t, y_pred);
 
     g_assert_cmpfloat(ffm_r2_score(y_pred, pFix->y), > , .98);
 
@@ -107,7 +107,7 @@ void test_sgd_classification(TestFixture_T* pFix, gconstpointer pg){
     param.init_lambda_w = 0.5;
     param.init_lambda_V = 0.5;
     ffm_fit_sgd(coef, pFix->X_t, pFix->y, &param);
-    sparse_predict(coef, pFix->X, y_pred);
+    row_predict(coef, pFix->X_t, y_pred);
     for(int i=0; i< y_pred->size; i++)
         ffm_vector_set(y_pred, i, ffm_sigmoid(ffm_vector_get(y_pred, i)));
 
@@ -138,7 +138,7 @@ void test_first_order_bpr(TestFixture_T* pFix, gconstpointer pg){
         .stepsize=step_size, .SOLVER=SOLVER_SGD, .TASK=TASK_RANKING};
     param.init_lambda_w = 0.0;
     ffm_fit_sgd_bpr(coef, pFix->X_t, compares, param);
-    sparse_predict(coef, pFix->X, y_pred);
+    row_predict(coef, pFix->X_t, y_pred);
     ffm_vector * pred_order = ffm_vector_get_order(y_pred);
     double kendall_tau = \
             ffm_vector_kendall_tau(true_order, pred_order);
