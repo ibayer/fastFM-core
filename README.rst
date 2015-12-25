@@ -1,16 +1,15 @@
-A short paper describing the library is now available on 
-arXiv http://arxiv.org/abs/1505.00641
+.. image:: https://travis-ci.org/ibayer/fastFM-core.svg
+    :target: https://travis-ci.org/ibayer/fastFM-core
 
 GIT CLONE INSTRUCTION
 =====================
-This repository relays on sub-repositories just using ``git clone ..``
-**doesn't fetch** them.
-
+This repository requires sub-repositories and just using ``git clone ..``
+**doesn't fetch** them. Use
 ``git clone --recursive ..``
+instead.
 
-Or do the two-step dance if you wish.
-You need to run ``git submodule update --init --recursive`` **from within** the
-``fastFM-core/`` folder in order to clone them as well.
+Otherwise you have to run ``git submodule update --init --recursive`` **from within** the
+``fastFM-core/`` folder in order to get the sub-repositories.
 
 
 DEPENDENCIES
