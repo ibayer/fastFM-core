@@ -4,6 +4,8 @@ os:
     - linux
     - osx
 
+dist: trusty
+
 before_install:
     - git submodule update --init --recursive
 
