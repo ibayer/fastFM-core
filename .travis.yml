@@ -1,10 +1,13 @@
-os: osx
+os:
+    - linux
+    - osx
 
 before_install:
   - git submodule update --init --recursive
 
 install:
   - brew install glib argp-standalone
+  - sudo apt-get update -qq libglib2.0-dev libatlas-base-dev libgsl0-dev
 
 script:
   - make
