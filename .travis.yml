@@ -4,7 +4,7 @@ before_install:
   - git submodule update --init --recursive
 
 install:
-  - brew install glib gsl argp-standalone
+  - brew install glib argp-standalone
 
 script:
   - make
