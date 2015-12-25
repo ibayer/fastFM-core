@@ -1,0 +1,10 @@
+os: osx
+
+before_install:
+  - git submodule update --init --recursive
+
+install:
+  - brew install glib gsl argp-standalone
+
+script:
+  - make
