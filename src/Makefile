@@ -3,6 +3,9 @@ CFLAGS = `pkg-config --cflags glib-2.0` -std=c99 -fPIC -g -Wall -O3 -I/include -
 LDLIBS= `pkg-config --libs glib-2.0` -L../externals/CXSparse/Lib -lcxsparse -lcblas -latlas -lm
 CC=gcc
 
+ifeq ($(shell uname -s),Darwin)
+	CFLAGS += -I$(shell find /System/Library/Frameworks/Accelerate.framework -name 'cblas.h' | xargs dirname)
+endif
 
 $(P): CFLAGS += -DTest_operations 
 $(P): $(OBJECTS)
