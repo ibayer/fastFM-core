@@ -7,6 +7,13 @@
 src/tests/test_ffm_als_mcmc
 src/tests/test_ffm_utils
 src/tests/test_ffm_sgd
+src/tests/test_random
+
+# OS X build-generated directories
+src/tests/test_ffm_als_mcmc.dSYM/
+src/tests/test_ffm_utils.dSYM/
+src/tests/test_random.dSYM/
+
 bin/
 demo/data/ranking_predictions
 dense_fm
