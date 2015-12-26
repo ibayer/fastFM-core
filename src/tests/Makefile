@@ -6,6 +6,10 @@ LDLIBS= `pkg-config --libs gsl glib-2.0` -L../../externals/CXSparse/Lib -lcxspar
 
 CC=gcc
 
+ifeq ($(shell uname -s),Darwin)
+	CFLAGS += -I$(shell find /System/Library/Frameworks/Accelerate.framework -name 'cblas.h' | xargs dirname)
+endif
+
 all: test_ffm_sgd test_ffm_als_mcmc test_ffm_utils test_random
 	( cd ../../externals/CXSparse ; $(MAKE) library )
 
