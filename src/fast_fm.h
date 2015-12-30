@@ -13,7 +13,6 @@
 #include <stdbool.h>
 #include <string.h>
 #include <assert.h>
-#include <glib.h>
 #include <math.h>
 #include <stdio.h>
 #include "../externals/CXSparse/Include/cs.h"
