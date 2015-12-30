@@ -2,6 +2,7 @@
 // License: BSD 3 clause
 
 #include "fast_fm.h"
+#include <unistd.h>
 
 // ########################### ffm scalar ###################################
 double ffm_sigmoid(double x){
@@ -355,7 +356,7 @@ double ffm_blas_dnrm2(ffm_vector *x){
 
 ffm_matrix * ffm_matrix_from_file(char *path)
 {
-    assert (g_file_test(path, G_FILE_TEST_EXISTS) && "file doesn't exist");
+    assert(access( path, F_OK ) != -1 && "file doesn't exist");
     FILE *fp =  fopen(path, "r");
 
     // get number of rows
@@ -403,7 +404,7 @@ ffm_matrix * ffm_matrix_from_file(char *path)
 fm_data read_svm_light_file( char *path)
 {
 
-    assert (g_file_test(path, G_FILE_TEST_EXISTS) && "file doesn't exist");
+    assert(access( path, F_OK ) != -1 && "file doesn't exist");
     FILE *fp =  fopen(path, "r");
 
     cs *T = cs_spalloc (0, 0, 1, 1, 1) ;  /* allocate result */
