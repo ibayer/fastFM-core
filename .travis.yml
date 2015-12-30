@@ -18,7 +18,7 @@ install:
 script:
     - make
       # run test suite
-    - cd src/tests/; make all; make check
+    - (cd src/tests/; make all; make check)
       # run cli demo
-    - cd demo/; make; make run
+    - (cd demo/; make; make run)
 
