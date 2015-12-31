@@ -1,6 +1,6 @@
 OBJECTS= kmath.o ffm_random.o ffm_als_mcmc.o ffm_utils.o ffm_sgd.o ffm.o
 CFLAGS = -std=c99 -fPIC -g -Wall -O3 -I/include -I./src -I../externals/CXSparse/Include
-LDLIBS= -L../externals/CXSparse/Lib -lcxsparse -lcblas -lm
+LDLIBS= -L../externals/CXSparse/Lib -L/usr/local/opt/argp-standalone/lib -lcxsparse -lcblas -lm
 CC=gcc
 
 ifeq ($(shell uname -s),Darwin)
