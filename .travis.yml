@@ -21,7 +21,5 @@ script:
     - (cd src/tests/; make all; make check)
       # run lib demo
     - (cd demo/; make; make demo_lib)
-    - make cli
-      # run cli demo
-    - (cd demo/; make; make demo_cli)
-
+      # run cli demo, linking fails on osx
+    - if [ "$TRAVIS_OS_NAME" = "linux" ]; make cli; (cd demo/; make; make demo_cli); fi
