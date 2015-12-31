@@ -27,6 +27,8 @@ and for the testsuite also ``sudo apt-get install libgsl0-dev``
 
 Install on OSX
 ===============
+Library compiles on OSX, however console interface doesn't.
+
 Recommended way to manage dependencies is `Homebrew package manager
 <https://brew.sh>`_. If you have brew installed, dependencies can be installed by running command ``brew install glib argp-standalone``.
 
