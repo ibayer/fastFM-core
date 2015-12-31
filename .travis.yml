@@ -21,6 +21,7 @@ script:
     - (cd src/tests/; make all; make check)
       # run lib demo
     - (cd demo/; make; make demo_lib)
+    - make cli
       # run cli demo
     - (cd demo/; make; make demo_cli)
 
