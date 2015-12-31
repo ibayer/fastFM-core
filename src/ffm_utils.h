@@ -5,7 +5,6 @@
 #define FFM_UTILS_H
 
 #include "fast_fm.h"
-#include <glib.h>
 
 // ########################### ffm scalar ###################################
 double ffm_sigmoid(double x);
