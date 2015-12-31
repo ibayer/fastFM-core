@@ -1,8 +1,8 @@
 P= example_als_mcmc example_sgd example_sgd_bpr
 VPATH = ../
 OBJECTS= example_als_mcmc.o example_sgd example_sgd_bpr
-CFLAGS = `pkg-config --cflags glib-2.0` -std=c99 -g -Wall -O0 -I../include -L../bin -I../externals/CXSparse/Include
-LDLIBS= -lfastfm `pkg-config --libs glib-2.0`  -L../externals/CXSparse/Lib -lcxsparse -lcblas -lm
+CFLAGS = -std=c99 -g -Wall -O0 -I../include -L../bin -I../externals/CXSparse/Include
+LDLIBS= -lfastfm -L../externals/CXSparse/Lib -lcxsparse -lcblas -lm
 CC=gcc
 
 all: $(P)
@@ -10,10 +10,12 @@ all: $(P)
 
 #test_ffm_sgd.o: fast_fm.h
 
-run:
+demo_lib:
 	./example_sgd
 	./example_sgd_bpr
 	./example_als_mcmc
+
+demo_cli: regression classification
 
 regression:
 	./../bin/fastfm data/train_regression data/test_regression \

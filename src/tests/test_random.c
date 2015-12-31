@@ -1,4 +1,5 @@
 #include "fast_fm.h"
+#include <glib.h>
 
 
 void test_rng_seed(void){

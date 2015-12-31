@@ -2,6 +2,7 @@
 // License: BSD 3 clause
 
 #include "fast_fm.h"
+#include "kvec.h"
 #include <unistd.h>
 
 // ########################### ffm scalar ###################################
@@ -415,11 +416,11 @@ fm_data read_svm_light_file( char *path)
     int line_nr = 0;
 
     // check if file contains target
-    bool hasTarget = TRUE;
+    bool hasTarget = true;
     char c = fgetc(fp);
     while(c != ' ')
     {
-        if (c == ':') hasTarget = FALSE;
+        if (c == ':') hasTarget = false;
         c = fgetc(fp);
     }
     rewind(fp);
@@ -427,10 +428,11 @@ fm_data read_svm_light_file( char *path)
 
   /* We create a new array to store double values.
      We don't want it zero-terminated or cleared to 0's. */
-    GArray *garray;
     double target;
     double dummy_target = 0;
-    garray = g_array_new (FALSE, FALSE, sizeof (double));
+
+    kvec_t(double) array;
+    kv_init(array);
 
     // read svm_light file line by line
     while ((read = getline(&line, &len, fp)) != -1) {
@@ -441,9 +443,12 @@ fm_data read_svm_light_file( char *path)
         if (hasTarget)
         {
             target = atof(token);
-            g_array_append_val (garray, target);
+            kv_push(double, array, target); // append
         }
-        else g_array_append_val (garray, dummy_target);
+        else
+        {
+            kv_push(double, array, dummy_target); // append
+        }
 
         if (hasTarget)
             token = strtok_r(NULL, " ", &end_str);
@@ -466,11 +471,11 @@ fm_data read_svm_light_file( char *path)
 
     ffm_vector *y = ffm_vector_alloc(line_nr);
 
-    // copy from garray to ffm_vector
+    // copy from kvec to ffm_vector
     for (int k=0; k< line_nr; k++)
-        ffm_vector_set(y, k, g_array_index(garray, double ,k));
+        ffm_vector_set(y, k, kv_a(double, array, k));
 
-    g_array_free(garray, TRUE);
+    kv_destroy(array);
     cs *X = cs_compress (T);
     cs_spfree(T);
 

@@ -1,4 +1,5 @@
 #include "fast_fm.h"
+#include <glib.h>
 
 typedef struct TestFixture_T {
     cs *X;

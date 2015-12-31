@@ -19,6 +19,8 @@ script:
     - make
       # run test suite
     - (cd src/tests/; make all; make check)
+      # run lib demo
+    - (cd demo/; make; make demo_lib)
       # run cli demo
-    - (cd demo/; make; make run)
+    - (cd demo/; make; make demo_cli)
 

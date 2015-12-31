@@ -1,4 +1,5 @@
 #include "fast_fm.h"
+#include <glib.h>
 
 
 void test_ffm_vector_mean(void){
