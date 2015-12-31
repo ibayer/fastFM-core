@@ -6,9 +6,8 @@ LDLIBS= -lfastfm -L../externals/CXSparse/Lib -lcxsparse -lcblas -lm
 CC=gcc
 
 all: $(P)
-	$(MAKE) -C ../ lib
+	( cd .. ; $(MAKE) lib)
 
-#test_ffm_sgd.o: fast_fm.h
 
 demo_lib:
 	./example_sgd
