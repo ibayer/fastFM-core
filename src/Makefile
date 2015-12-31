@@ -22,7 +22,7 @@ lib: $(OBJECTS)
 	mkdir -p ../bin/
 	ar rcs ../bin/libfastfm.a $(OBJECTS)
 
-cli: $(OBJECTS)
+cli: $(OBJECTS) cli.o
 	( cd ../externals/CXSparse ; $(MAKE) library )
 	mkdir -p ../bin/
 	$(CC) $(OBJECTS) cli.o $(CFLAGS) $(LDLIBS) -o ../bin/fastfm
@@ -30,5 +30,6 @@ cli: $(OBJECTS)
 .PHONY : clean
 clean :
 	rm -f $(P) $(OBJECTS)
+	rm -f  *.o
 	rm -f ../bin/libfastfm.a
 	rm -f ../bin/fastfm

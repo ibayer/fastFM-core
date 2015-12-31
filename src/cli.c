@@ -2,6 +2,7 @@
 // License: BSD 3 clause
 
 #include "fast_fm.h"
+#include <time.h>
 #include <stdlib.h>
 #include <argp.h>
 #include <fenv.h>
