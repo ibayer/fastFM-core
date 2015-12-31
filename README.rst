@@ -14,10 +14,10 @@ Otherwise you have to run ``git submodule update --init --recursive`` **from wit
 
 DEPENDENCIES
 ============
-* glib-2.0
 * CXSparse (included)
 * gsl 1.15-1 (only testsuite)
-* argp (included by default in Linux)
+* glib-2.0 (only testsuite)
+* argp (only cli, included by default in Linux)
 
 install depenencies:
 -------------------
