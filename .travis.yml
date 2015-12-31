@@ -22,7 +22,6 @@ install:
     - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt-get install -y libglib2.0-dev libatlas-base-dev libgsl0-dev; fi
 
 script:
-    - make
       # run test suite
     - (cd src/tests/; make all; make check)
       # run cli demo, linking fails on osx
