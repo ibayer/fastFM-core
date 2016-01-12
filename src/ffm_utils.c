@@ -228,6 +228,7 @@ int ffm_vector_free(ffm_vector *a){
     else return 1;
 }
 ffm_vector * ffm_vector_alloc(int size){
+    assert(size > 0 && "can't allocate vector with size <= 0");
     struct ffm_vector *x = malloc(sizeof *x);
     double *ptr;
     ptr = malloc(size * sizeof(double));
@@ -319,6 +320,8 @@ ffm_matrix * ffm_matrix_alloc(int size0, int size1){
 }
 
 ffm_matrix * ffm_matrix_calloc(int size0, int size1){
+    assert(size0 > 0 && "can't allocate matrix with size0 <= 0");
+    assert(size1 > 0 && "can't allocate matrix with size1 <= 0");
     struct ffm_matrix *x = malloc(sizeof *x);
     double *ptr;
     ptr = calloc(size0 * size1, sizeof(double));
