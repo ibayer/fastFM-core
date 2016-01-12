@@ -60,6 +60,8 @@ how to run tests
 * run all tests ``make check``
 * run valgrind memory check on sparse_test.c ``make mem_check``
 * run valgrind to check for errors ``valgrind -v ./a.out >& out``
+* check coding style (google) ``lang-format-3.5 -style=google -i <YOUR_FILE.c/h>``
+* static code analysis ``clang-tidy-3.5 -fix  <YOUR_FILE.c/h> -- I``
 
 cli example:
 
