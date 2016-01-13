@@ -3,7 +3,15 @@
 
 #include "fast_fm.h"
 
+
 void sparse_predict(ffm_coef *coef, cs *A, ffm_vector *y_pred) {
+  cs * X = cs_transpose (A, 1);
+  row_predict(coef, X, y_pred);
+  cs_spfree (X) ;
+}
+
+void col_predict(ffm_coef *coef, cs *A, ffm_vector *y_pred) {
+
   // y[:] = w_0
   ffm_vector_set_all(y_pred, coef->w_0);
   // y += Xw
@@ -56,6 +64,38 @@ void row_predict(ffm_coef *coef, cs *X, ffm_vector *y_pred) {
   // check if second order interactions are used
   if (!coef->V) return;
   eval_second_order_term(coef->V, X, y_pred);
+}
+
+int eval_second_order_term(ffm_matrix *V, cs *A, ffm_vector *y) {
+  // operate on X.T
+  int k = V->size0;
+
+  int p, j, f, n, *Ap, *Ai;
+  double *Ax;
+  if (!CS_CSC(A)) return (0); /* check inputs */
+  n = A->n;
+  Ap = A->p;
+  Ai = A->i;
+  Ax = A->x;
+  // over all k
+  for (f = 0; f < k; f++) {
+    // over all rows
+    for (j = 0; j < n; j++) {
+      double tmp_sum = 0;
+      // all nz in this column
+      // Ai[p] is the (col) position in the original matrix
+      // Ax[p] is the value at position Ai[p]
+      for (p = Ap[j]; p < Ap[j + 1]; p++) {
+        // V
+        double tmp_v = ffm_matrix_get(V, f, Ai[p]);
+        double tmp_x = Ax[p];
+        tmp_sum += tmp_x * tmp_v;
+        y->data[j] -= 0.5 * (tmp_x * tmp_x) * (tmp_v * tmp_v);
+      }
+      y->data[j] += 0.5 * (tmp_sum * tmp_sum);
+    }
+  }
+  return (1);
 }
 
 void sparse_fit(ffm_coef *coef, cs *X_train, cs *X_test, ffm_vector *y,
@@ -246,38 +286,6 @@ void map_update_target(ffm_vector *y_pred, ffm_vector *z_target,
     else  // right truncated
       z_target->data[i] = -(ffm_normal_pdf(-mu) / ffm_normal_cdf(-mu));
   }
-}
-
-int eval_second_order_term(ffm_matrix *V, cs *A, ffm_vector *y) {
-  // operate on X.T
-  int k = V->size0;
-
-  int p, j, f, n, *Ap, *Ai;
-  double *Ax;
-  if (!CS_CSC(A)) return (0); /* check inputs */
-  n = A->n;
-  Ap = A->p;
-  Ai = A->i;
-  Ax = A->x;
-  // over all k
-  for (f = 0; f < k; f++) {
-    // over all rows
-    for (j = 0; j < n; j++) {
-      double tmp_sum = 0;
-      // all nz in this column
-      // Ai[p] is the (col) position in the original matrix
-      // Ax[p] is the value at position Ai[p]
-      for (p = Ap[j]; p < Ap[j + 1]; p++) {
-        // V
-        double tmp_v = ffm_matrix_get(V, f, Ai[p]);
-        double tmp_x = Ax[p];
-        tmp_sum += tmp_x * tmp_v;
-        y->data[j] -= 0.5 * (tmp_x * tmp_x) * (tmp_v * tmp_v);
-      }
-      y->data[j] += 0.5 * (tmp_sum * tmp_sum);
-    }
-  }
-  return (1);
 }
 
 void sample_hyper_parameter(ffm_coef *coef, ffm_vector *err, ffm_rng *rng) {
