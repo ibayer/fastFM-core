@@ -2,17 +2,20 @@ If you use this project please give credit by citing:
 
     Immanuel Bayer (2015): fastFM: A Library for Factorization Machines http://arxiv.org/abs/1505.00641
 
-.. image:: https://travis-ci.org/ibayer/fastFM-core.svg
-    :target: https://travis-ci.org/ibayer/fastFM-core
 
-.. image:: https://img.shields.io/badge/platform-OSX|Linux-lightgrey.svg
-    :target: https://travis-ci.org/ibayer/fastFM
-
-.. image:: https://img.shields.io/pypi/l/Django.svg   
-    :target: https://travis-ci.org/ibayer/fastFM
 
 fastFM: A Library for Factorization Machines
 ============================================
+
+.. image:: https://travis-ci.org/ibayer/fastFM-core.svg?branch=master
+   :target: https://travis-ci.org/ibayer/fastFM-core
+   
+   
+.. image:: https://img.shields.io/badge/platform-OSX|Linux-lightgrey.svg
+  :target: https://travis-ci.org/ibayer/fastFM
+  
+.. image:: https://img.shields.io/pypi/l/Django.svg   
+   :target: https://travis-ci.org/ibayer/fastFM
 
 This repository contains the source code for the fastFM C library and the stand-alone
 comand line interface (cli). In general we recommend to use fastFM through the high level `Python
