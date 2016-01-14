@@ -55,7 +55,7 @@ Installation
 **OS X:**
 Library compiles on OSX, however console interface doesn't.
 
-.. code-block::
+.. code-block:: bash
 
     # Install cblas (Linux only).
     $ sudo apt-get libatlas-base-dev
@@ -77,7 +77,7 @@ Recommended way to manage dependencies is `Homebrew package manager <https://bre
 If you have brew installed, dependencies can be installed by running command
 ``brew install glib gsl argp-standalone``.
 
-.. code-block::
+.. code-block:: bash
 
     # The tests require the glib and gsl library (Linux, for OSX see above).
     $ sudo apt-get libglib2.0-dev libgsl0-dev
