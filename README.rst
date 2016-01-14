@@ -103,7 +103,8 @@ Contribution
 to open a pull request (PR) for code contributions as early as possible. This is the
 fastest way to get feedback and allows `Travis CI <https://travis-ci.org/ibayer/fastFM-core>`_ to run checks on your changes.
 
-**Development Guidlines**
+Development Guidlines
+---------------------
 
 * check coding style (google) ``lang-format-3.5 -style=google -i <YOUR_FILE.c/h>``
 * static code analysis ``clang-tidy-3.5 -fix  <YOUR_FILE.c/h> -- I.``
