@@ -18,7 +18,7 @@ fastFM: A Library for Factorization Machines
    :target: https://travis-ci.org/ibayer/fastFM
 
 This repository contains the source code for the fastFM C library and the stand-alone
-comand line interface (cli). In general we recommend to use fastFM through the high level `Python
+comand line interface (cli). In general we recommend to use fastFM with the `Python
 interface <https://github.com/ibayer/fastFM>`_.
 
 Usage
