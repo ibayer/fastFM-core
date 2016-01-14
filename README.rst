@@ -1,68 +1,117 @@
+If you use this project please give credit by citing:
+
+    Immanuel Bayer (2014): fastFM: A Library for Factorization Machines http://arxiv.org/abs/1505.00641
+
 .. image:: https://travis-ci.org/ibayer/fastFM-core.svg
     :target: https://travis-ci.org/ibayer/fastFM-core
 
-GIT CLONE INSTRUCTION
-=====================
-This repository requires sub-repositories and just using ``git clone ..``
-**doesn't fetch** them. Use
-``git clone --recursive ..``
-instead.
+.. image:: https://img.shields.io/badge/platform-OSX|Linux-lightgrey.svg
+    :target: https://travis-ci.org/ibayer/fastFM
 
-Otherwise you have to run ``git submodule update --init --recursive`` **from within** the
-``fastFM-core/`` folder in order to get the sub-repositories.
+.. image:: https://img.shields.io/pypi/l/Django.svg   
+    :target: https://travis-ci.org/ibayer/fastFM
+
+fastFM: A Library for Factorization Machines
+============================================
+
+This repository contains the source code for the fastFM C library and an stand-alone
+comand line interface (cli). In general we recommend to use fastFM through the high level `Python
+interface <https://github.com/ibayer/fastFM>`_ as this contains more input checking as
+the C interface.
 
 
-DEPENDENCIES
-============
-* CXSparse (included)
-* gsl 1.15-1 (only testsuite)
-* glib-2.0 (only testsuite)
-* argp (only cli, included by default in Linux)
+Usage
+-----
 
-install depenencies:
--------------------
-this worked on ubuntu 14.04:
-``sudo apt-get install libglib2.0-dev libatlas-base-dev``
-and for the testsuite also ``sudo apt-get install libgsl0-dev``
+.. code-block:: bash
+	./fastFM-core/bin/bin/fastfm data/train_regression data/test_regression \
+		--task regression   \
+		--rng-seed 1234     \
+		--init-var=0.11     \
+		--n-iter=123        \
+		--solver='mcmc'     \
+		--rank 7            \
+		--l2-reg=.22
 
-Install on OSX
-===============
+Examples how to use the other command line options options, including example data, can be found
+in ``fastFM-core/demo/Makefile``. The ``demo/`` folder contains also examples how to use
+fastFM as C library.
+
++----------------+------------------+-----------------------------+
+| Task           | Solver           | Loss                        |
++================+==================+=============================+
+| Regression     | als, mcmc, sgd   | Square Loss                 |
++----------------+------------------+-----------------------------+
+| Classification | als, mcmc, sgd   | Probit(Map), Probit, Sigmoid|
++----------------+------------------+-----------------------------+
+| Ranking        | sgd              | BPR                         |
++----------------+------------------+-----------------------------+
+*Supported solvers and tasks*
+
+Installation
+------------
+
+**OS X**
 Library compiles on OSX, however console interface doesn't.
+Recommended way to manage dependencies is `Homebrew package manager <https://brew.sh>`_.
+If you have brew installed, dependencies can be installed by running command
+``brew install glib gsl argp-standalone``.
 
-Recommended way to manage dependencies is `Homebrew package manager
-<https://brew.sh>`_. If you have brew installed, dependencies can be installed by running command ``brew install glib argp-standalone``.
+.. code-block::
 
-Install on Windows
-========================
-It should be possible to compile the library on Windows.
-I'm developing on linux but have received multiple requests from people who
-want to run this library on other platforms.
-Please let me know about issues you ran into or how you manged to compile on
-other platfroms (or just open a PR) so that we include this information here.
+    # Install cblas (Linux only).
+    $ sudo apt-get libatlas-base-dev
 
-compile command line linterface
-===============================
-compile cli: ``make cli``
-you can find the executible in ``fastFM-core/bin``.
+    # Clone the repro including submodules (or clone + `git submodule update --init --recursive`)
+    $ git clone --recursive https://github.com/ibayer/fastFM-core.git
+
+    # Build library
+    $ cd fastFM-core/; make;
+
+    # Build command line interface (this works currently only on osx)
+    $ make cli
+
+Tests
+-----
+
+.. code-block::
+
+    # The tests require the glib and gsl library.
+    $ sudo apt-get libglib2.0-dev libgsl0-dev
+
+    $ cd fastFM-core/src/tests
+
+    # Build the tests
+    $ make
+
+    # Run all tests
+    $ make check
 
 
-demo
-====
-``demo/data/`` contains sample input files for various tasks
-and examples how to use fastFM's CLI interface can be found in
-``demo/Makefile``
+Contribution
+------------
 
-how to run tests
-----------------
+* Star this repository: keeps contributors motivated
+* Open a issue: report bugs or suggest improvements
+* Fix errors in the documentation: small changes matter
+* Contribute code
 
-* cd ``src/tests/``
-* bulid tests ``make all``
-* run all tests ``make check``
-* run valgrind memory check on sparse_test.c ``make mem_check``
-* run valgrind to check for errors ``valgrind -v ./a.out >& out``
+**Contributions are very wellcome!** Since this project lives on github we reommend
+to open a pull request (PR) for code contributions as early as possible. This is the
+fastest way to get feedback and allows `Travis CI <https://travis-ci.org/ibayer/fastFM-core>`_ to run checks on your changes.
+
+**Development Guidlines**
 * check coding style (google) ``lang-format-3.5 -style=google -i <YOUR_FILE.c/h>``
 * static code analysis ``clang-tidy-3.5 -fix  <YOUR_FILE.c/h> -- I.``
+* run valgrind memory check on sparse_test.c ``make mem_check``
+* run valgrind to check for errors ``valgrind -v ./a.out >& out``
 
-cli example:
 
-./fastFM-core/bin/fastfm data/train_regression data/test_regression --task regression --init-var=0.11 --n-iter=123 --solver='mcmc' --rank 7 --l2-reg=.22
+**Contributors**
+
+* takuti
+* altimin
+* ibayer
+
+License: BSD
+------------
