@@ -14,27 +14,28 @@ If you use this project please give credit by citing:
 fastFM: A Library for Factorization Machines
 ============================================
 
-This repository contains the source code for the fastFM C library and an stand-alone
+This repository contains the source code for the fastFM C library and the stand-alone
 comand line interface (cli). In general we recommend to use fastFM through the high level `Python
-interface <https://github.com/ibayer/fastFM>`_ as this contains more input checking as
-the C interface.
-
+interface <https://github.com/ibayer/fastFM>`_.
 
 Usage
 -----
 
-.. code-block:: bash
-	./fastFM-core/bin/bin/fastfm data/train_regression data/test_regression \
-		--task regression   \
-		--rng-seed 1234     \
-		--init-var=0.11     \
-		--n-iter=123        \
-		--solver='mcmc'     \
-		--rank 7            \
-		--l2-reg=.22
 
-Examples how to use the other command line options options, including example data, can be found
-in ``fastFM-core/demo/Makefile``. The ``demo/`` folder contains also examples how to use
+.. code-block:: bash
+
+    fastFM-core/bin/bin/fastfm data/train_regression data/test_regression \
+	--task regression   \
+	--rng-seed 1234     \
+	--init-var=0.11     \
+	--n-iter=123        \
+	--solver='mcmc'     \
+	--rank 7            \
+	--l2-reg=.22
+
+
+Examples on how to use the other command line options options, including example data, can be found
+in ``fastFM-core/demo/Makefile``. The ``demo/`` folder contains examples showing how to use
 fastFM as C library.
 
 +----------------+------------------+-----------------------------+
@@ -51,11 +52,8 @@ fastFM as C library.
 Installation
 ------------
 
-**OS X**
+**OS X:**
 Library compiles on OSX, however console interface doesn't.
-Recommended way to manage dependencies is `Homebrew package manager <https://brew.sh>`_.
-If you have brew installed, dependencies can be installed by running command
-``brew install glib gsl argp-standalone``.
 
 .. code-block::
 
@@ -74,9 +72,14 @@ If you have brew installed, dependencies can be installed by running command
 Tests
 -----
 
+**OS X:**
+Recommended way to manage dependencies is `Homebrew package manager <https://brew.sh>`_.
+If you have brew installed, dependencies can be installed by running command
+``brew install glib gsl argp-standalone``.
+
 .. code-block::
 
-    # The tests require the glib and gsl library.
+    # The tests require the glib and gsl library (Linux, for OSX see above).
     $ sudo apt-get libglib2.0-dev libgsl0-dev
 
     $ cd fastFM-core/src/tests
@@ -101,6 +104,7 @@ to open a pull request (PR) for code contributions as early as possible. This is
 fastest way to get feedback and allows `Travis CI <https://travis-ci.org/ibayer/fastFM-core>`_ to run checks on your changes.
 
 **Development Guidlines**
+
 * check coding style (google) ``lang-format-3.5 -style=google -i <YOUR_FILE.c/h>``
 * static code analysis ``clang-tidy-3.5 -fix  <YOUR_FILE.c/h> -- I.``
 * run valgrind memory check on sparse_test.c ``make mem_check``
