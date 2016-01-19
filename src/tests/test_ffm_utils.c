@@ -397,7 +397,7 @@ void test_read_svm_light_file(void) {
   cs_entry(X, 0, 1, 1);
   cs_entry(X, 1, 0, 2);
   cs_entry(X, 1, 1, 3);
-  cs_entry(X, 2, 0, 3);
+  //cs_entry(X, 2, 0, 3);
   cs_entry(X, 3, 0, 6);
   cs_entry(X, 3, 1, 1);
   cs_entry(X, 4, 0, 4);
@@ -428,8 +428,8 @@ void test_read_svm_light_file_without_target(void) {
   cs_entry(X, 1, 0, 2);
   cs_entry(X, 1, 1, 3);
   cs_entry(X, 2, 0, 3);
-  cs_entry(X, 3, 0, 6);
-  cs_entry(X, 3, 1, 1);
+  //cs_entry(X, 3, 0, 6);
+  //cs_entry(X, 3, 1, 1);
   cs_entry(X, 4, 0, 4);
   cs_entry(X, 4, 1, 5);
   // printf ("X:\n") ; cs_print (X, 0) ; /* print A */
