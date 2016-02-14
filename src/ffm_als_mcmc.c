@@ -108,7 +108,14 @@ void sparse_fit(ffm_coef *coef, cs *X_train, cs *X_test, ffm_vector *y,
   ffm_matrix *V = coef->V;
   double *w_0 = &coef->w_0;
 
-  ffm_rng *rng = ffm_rng_seed(param.rng_seed);
+  ffm_rng *rng;
+  if (param.warm_start) {
+     // The rng seed needs to be different for each warm start to ensure
+     // proper mixing of the mcmc chain.
+     rng= ffm_rng_seed(param.rng_seed * param.n_iter % 31);
+  } else {
+     rng= ffm_rng_seed(param.rng_seed);
+  }
 
   if (!param.warm_start) init_ffm_coef(coef, param);
 
