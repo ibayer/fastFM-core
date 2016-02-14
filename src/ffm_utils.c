@@ -422,6 +422,7 @@ fm_data read_svm_light_file(char *path) {
   while ((read = getline(&line, &len, fp)) != -1) {
     char *end_str;
     char *token = strtok_r(line, " ", &end_str);
+    //printf("linr nr: %i \n", line_nr);
 
     if (hasTarget) {
       target = atof(token);
@@ -439,10 +440,12 @@ fm_data read_svm_light_file(char *path) {
       double col_nr = atoi(token2);
 
       token2 = strtok_r(NULL, ":", &end_token);
-      double value = atof(token2);
+      if (token2 != NULL) {
+        double value = atof(token2);
+        assert(cs_entry(T, (int)line_nr, (int)col_nr, value) &&
+                "cs_entry failed, out of memory?");
+      }
       token = strtok_r(NULL, " ", &end_str);
-      assert(cs_entry(T, (int)line_nr, (int)col_nr, value) &&
-             "cs_entry failed, out of memory?");
     }
     line_nr++;
   }
