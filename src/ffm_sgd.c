@@ -89,15 +89,17 @@ void ffm_fit_sgd_bpr(ffm_coef *coef, cs *A, ffm_matrix *pairs,
     int p_p = Ap[sample_row_p];
     while (p_n < Ap[sample_row_n + 1] || p_p < Ap[sample_row_p + 1]) {
       double grad = 0;
-        int i_to_update;
-        if (Ai[p_p] <= Ai[p_n] && p_p<Ap[sample_row_p + 1]) {
-            i_to_update = Ai[p_p];
-        } else {
-            if (p_n<Ap[sample_row_n + 1]) {
-                i_to_update = Ai[p_n];
-            }
-        }
-        double theta_w = coef->w->data[i_to_update];
+      int i_to_update = 0;
+      if (Ai[p_p] <= Ai[p_n] && p_p<Ap[sample_row_p + 1]) {
+          i_to_update = Ai[p_p];
+      } else {
+          if (p_n<Ap[sample_row_n + 1]) {
+              i_to_update = Ai[p_n];
+          } else {
+            break;
+          }
+      }
+      double theta_w = coef->w->data[i_to_update];
       // incrementing the smaller index or both if equal
       if (Ai[p_p] == i_to_update) {
         grad = Ax[p_p];
