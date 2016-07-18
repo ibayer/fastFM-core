@@ -55,7 +55,7 @@ void test_first_order_sgd(TestFixture_T *pFix, gconstpointer pg) {
 
 void test_second_order_sgd(TestFixture_T *pFix, gconstpointer pg) {
   int n_features = pFix->X->n;
-  int k = 2;
+  int k = 3;
   int n_iter = 10;
   double init_sigma = .01;
   double step_size = .0002;
@@ -128,7 +128,7 @@ void test_first_order_bpr(TestFixture_T *pFix, gconstpointer pg) {
   int n_features = pFix->X->n;
   int n_samples = pFix->X->m;
   int k = 0;
-  int n_iter = 200;
+  int n_iter = 50;
   double init_sigma = .01;
   double step_size = .002;
 
@@ -139,7 +139,7 @@ void test_first_order_bpr(TestFixture_T *pFix, gconstpointer pg) {
   for (int i = 0; i < 2; i++) coef->w->data[i] = 0.1;
 
   ffm_vector *y_pred = ffm_vector_calloc(n_samples);
-  ffm_param param = {.n_iter = n_iter * 100,
+  ffm_param param = {.n_iter = n_iter,
                      .init_sigma = init_sigma,
                      .stepsize = step_size,
                      .SOLVER = SOLVER_SGD,
