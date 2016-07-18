@@ -120,7 +120,6 @@ void ffm_fit_sgd_bpr(ffm_coef *coef, cs *A, ffm_matrix *pairs,
       if (p_n < p_n_end && (Ai[p_n] <= Ai[p_p] || !(p_p < p_p_end))) {
         add_n = true;
       }
-      /*printf("p_p %i p_n %i \n", p_p, p_n);*/
 
       // Add feature value to gradient and increment feature position.
       double grad = 0;
