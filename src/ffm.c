@@ -113,6 +113,7 @@ void ffm_mcmc_fit_predict(double *w_0, double *w, double *V, cs *X_train,
 
 void ffm_sgd_bpr_fit(double *w_0, double *w, double *V, cs *X, double *pairs,
                      int n_pairs, ffm_param *param) {
+  // X is transpose of design matrix. Samples are stored in columns.
   int n_features = X->m;
   ffm_vector ffm_w = {.size = n_features, .data = w, .owner = 0};
   ffm_matrix ffm_V = {
@@ -137,6 +138,7 @@ void ffm_sgd_bpr_fit(double *w_0, double *w, double *V, cs *X, double *pairs,
 
 void ffm_sgd_fit(double *w_0, double *w, double *V, cs *X, double *y,
                  ffm_param *param) {
+  // X is transpose of design matrix. Samples are stored in columns.
   int n_samples = X->n;
   int n_features = X->m;
 
