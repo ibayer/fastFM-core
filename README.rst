@@ -61,7 +61,7 @@ Library compiles on OSX, however console interface doesn't.
 .. code-block:: bash
 
     # Install cblas (Linux only).
-    $ sudo apt-get libatlas-base-dev
+    $ sudo apt-get install libatlas-base-dev
 
     # Clone the repro including submodules (or clone + `git submodule update --init --recursive`)
     $ git clone --recursive https://github.com/ibayer/fastFM-core.git
@@ -69,7 +69,7 @@ Library compiles on OSX, however console interface doesn't.
     # Build library
     $ cd fastFM-core/; make;
 
-    # Build command line interface (this works currently only on osx)
+    # Build command line interface (currently this works on linux only)
     $ make cli
 
 Tests
@@ -83,7 +83,7 @@ If you have brew installed, dependencies can be installed by running command
 .. code-block:: bash
 
     # The tests require the glib and gsl library (Linux, for OSX see above).
-    $ sudo apt-get libglib2.0-dev libgsl0-dev
+    $ sudo apt-get install libglib2.0-dev libgsl0-dev
 
     $ cd fastFM-core/src/tests
 
