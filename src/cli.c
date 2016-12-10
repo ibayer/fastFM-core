@@ -295,7 +295,7 @@ int main(int argc, char **argv) {
   }
 
   if (param.SOLVER == SOLVER_SGD) {
-    row_predict(coef, test_data.X, y_test_predict);
+    sparse_predict(coef, test_data.X, y_test_predict);
     if (param.TASK == TASK_CLASSIFICATION)
       ffm_vector_normal_cdf(y_test_predict);
   }
