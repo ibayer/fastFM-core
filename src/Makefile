@@ -19,7 +19,10 @@ cli.o : fast_fm.h
 
 lib: $(OBJECTS)
 	( cd ../externals/CXSparse ; $(MAKE) library )
+	( cd ../externals/OpenBLAS ; $(MAKE) libs )
 	mkdir -p ../bin/
+	ar -x ../externals/CXSparse/Lib/libcxsparse.a
+	ar -x ../externals/OpenBLAS/libopenblas.a
 	ar rcs ../bin/libfastfm.a $(OBJECTS)
 
 cli: $(OBJECTS) cli.o
