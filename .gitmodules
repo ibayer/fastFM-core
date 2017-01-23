@@ -2,3 +2,6 @@
 	path = externals/CXSparse
 	url = https://github.com/ibayer/CXSparse.git
 
+[submodule "externals/OpenBLAS"]
+	path = externals/OpenBLAS
+	url = https://github.com/xianyi/OpenBLAS.git
