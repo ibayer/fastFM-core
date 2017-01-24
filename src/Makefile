@@ -1,6 +1,6 @@
 OBJECTS = kmath.o ffm_random.o ffm_als_mcmc.o ffm_utils.o ffm_sgd.o ffm.o
 INCLUDES = -I/include -I./src -I../externals/CXSparse/Include  -I../externals/OpenBLAS
-LDLIBS = -L../externals/CXSparse/Lib -lcxsparse -L../externals/OpenBLAS -lblas
+LDLIBS = -L../externals/CXSparse/Lib -lcxsparse -L../externals/OpenBLAS -lopenblas
 CFLAGS = -std=c99 -fPIC -g -Wall -O3 $(INCLUDES)
 CC=gcc
 
