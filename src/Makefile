@@ -15,16 +15,12 @@ cli.o : fast_fm.h
 
 
 lib: $(OBJECTS)
-	( cd ../externals/CXSparse ; $(MAKE) library )
-	( cd ../externals/OpenBLAS ; $(MAKE) )
 	mkdir -p ../bin/
 	ar -x ../externals/CXSparse/Lib/libcxsparse.a
 	ar -x ../externals/OpenBLAS/libopenblas.a
 	ar rcs ../bin/libfastfm.a $(OBJECTS) *.o
 
 cli: $(OBJECTS) cli.o
-	( cd ../externals/CXSparse ; $(MAKE) library )
-	( cd ../externals/OpenBLAS ; $(MAKE) )
 	mkdir -p ../bin/
 	$(CC) $(OBJECTS) cli.o $(CFLAGS) $(INCLUDES) $(LDLIBS) -o ../bin/fastfm
 

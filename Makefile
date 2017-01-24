@@ -1,5 +1,7 @@
 
 lib: $(OBJECTS)
+	( cd externals/CXSparse ; $(MAKE) library )
+	( cd externals/OpenBLAS ; $(MAKE) )
 	( cd src ; $(MAKE) lib )
 
 cli:
