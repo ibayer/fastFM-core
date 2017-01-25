@@ -1,6 +1,5 @@
 OBJECTS = kmath.o ffm_random.o ffm_als_mcmc.o ffm_utils.o ffm_sgd.o ffm.o
 INCLUDES =  -I../externals/OpenBLAS
-LDLIBS = -L../bin -lfastfm -lpthread -lm
 CFLAGS = -std=c99 -fPIC -g -Wall -O3 $(INCLUDES)
 CC=gcc
 
