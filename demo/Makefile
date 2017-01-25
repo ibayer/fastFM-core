@@ -1,9 +1,8 @@
 P= example_als_mcmc example_sgd example_sgd_bpr
 VPATH = ../
 OBJECTS = example_als_mcmc.o example_sgd example_sgd_bpr
-INCLUDE = -I../include -L../bin -I../externals/CXSparse/Include -I../externals/OpenBLAS
-CFLAGS = -std=c99 -g -Wall -O0 $(INCLUDE)
-LDLIBS = -L../bin -lfastfm -lopenblas -lpthread -lm
+CFLAGS = -std=c99 -g -Wall -O0
+LDLIBS = -L../bin -lfastfm -lpthread -lm
 CC = gcc
 
 all: $(P)
