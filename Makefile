@@ -5,6 +5,8 @@ lib: $(OBJECTS)
 	( cd src ; $(MAKE) lib )
 
 cli:
+	( cd externals/CXSparse ; $(MAKE) library )
+	( cd externals/OpenBLAS ; $(MAKE) libs)
 	( cd src ; $(MAKE) cli )
 
 .PHONY : clean
