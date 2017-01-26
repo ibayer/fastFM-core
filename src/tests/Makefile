@@ -1,14 +1,15 @@
 P= test_ffm_als_mcmc test_ffm_utils test_ffm_sgd test_random
 VPATH = ../
 OBJECTS= ffm_als_mcmc.o ffm_sgd.o
-INCLUDE = -I.. -I../../externals/OpenBLAS
-CFLAGS = `pkg-config --cflags gsl glib-2.0` -std=c99 -g -Wall -O0 $(INCLUDE)
+INCLUDES = -I.. 
+CFLAGS = `pkg-config --cflags gsl glib-2.0` -std=c99 -g -Wall -O0 $(INCLUDES)
 LDLIBS= `pkg-config --libs gsl glib-2.0` -L../../externals/CXSparse/Lib -lcxsparse
 
 CC=gcc
 
 all: test_ffm_sgd test_ffm_als_mcmc test_ffm_utils test_random
 	( cd ../../externals/CXSparse ; $(MAKE) library )
+	( cd ../../externals/OpenBLAS ; $(MAKE) libs)
 
 check: 
 	gtester test_random --keep-going --verbose
