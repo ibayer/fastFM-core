@@ -7,7 +7,6 @@
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE
 #endif
-#include <cblas.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -16,6 +15,7 @@
 #include <math.h>
 #include <stdio.h>
 #include "../externals/CXSparse/Include/cs.h"
+#include "../externals/OpenBLAS/cblas.h"
 
 #include "kmath.h"
 #include "../include/ffm.h"
