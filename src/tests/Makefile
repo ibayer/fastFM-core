@@ -9,7 +9,7 @@ CC=gcc
 
 all: test_ffm_sgd test_ffm_als_mcmc test_ffm_utils test_random
 	( cd ../../externals/CXSparse ; $(MAKE) library )
-	( cd ../../externals/OpenBLAS ; $(MAKE) libs)
+	( export USE_THREAD=0; cd externals/OpenBLAS ; $(MAKE) libs)
 
 check: 
 	gtester test_random --keep-going --verbose

@@ -2,7 +2,7 @@ P= example_als_mcmc example_sgd example_sgd_bpr
 VPATH = ../
 OBJECTS = example_als_mcmc.o example_sgd example_sgd_bpr
 CFLAGS = -std=c99 -g -Wall -O0
-LDLIBS = -L../bin -lfastfm -lpthread -lm
+LDLIBS = -L../bin -lfastfm -lm
 CC = gcc
 
 all: $(P)
