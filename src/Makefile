@@ -1,11 +1,8 @@
-OBJECTS= kmath.o ffm_random.o ffm_als_mcmc.o ffm_utils.o ffm_sgd.o ffm.o
-CFLAGS = -std=c99 -fPIC -g -Wall -O3 -I/include -I./src -I../externals/CXSparse/Include
-LDLIBS= -L../externals/CXSparse/Lib -lcxsparse -lblas -lm
+OBJECTS = kmath.o ffm_random.o ffm_als_mcmc.o ffm_utils.o ffm_sgd.o ffm.o
+INCLUDES =  -I../externals/OpenBLAS
+LDLIBS = -L../externals/CXSparse/Lib -lcxsparse  -L../externals/OpenBLAS -lopenblas -lpthread -lm
+CFLAGS = -std=c99 -fPIC -g -Wall -O3 $(INCLUDES)
 CC=gcc
-
-ifeq ($(shell uname -s),Darwin)
-	CFLAGS += -I$(shell find /System/Library/Frameworks/Accelerate.framework -name 'cblas.h' | xargs dirname)
-endif
 
 $(P): CFLAGS += -DTest_operations 
 $(P): $(OBJECTS)
@@ -18,14 +15,14 @@ cli.o : fast_fm.h
 
 
 lib: $(OBJECTS)
-	( cd ../externals/CXSparse ; $(MAKE) library )
 	mkdir -p ../bin/
-	ar rcs ../bin/libfastfm.a $(OBJECTS)
+	ar -x ../externals/CXSparse/Lib/libcxsparse.a
+	ar -x ../externals/OpenBLAS/libopenblas.a
+	ar rcs ../bin/libfastfm.a $(OBJECTS) *.o
 
 cli: $(OBJECTS) cli.o
-	( cd ../externals/CXSparse ; $(MAKE) library )
 	mkdir -p ../bin/
-	$(CC) $(OBJECTS) cli.o $(CFLAGS) $(LDLIBS) -o ../bin/fastfm
+	$(CC) $(OBJECTS) cli.o $(CFLAGS) $(INCLUDES) $(LDLIBS) -o ../bin/fastfm
 
 .PHONY : clean
 clean :

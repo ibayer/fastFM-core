@@ -1,9 +1,9 @@
 P= example_als_mcmc example_sgd example_sgd_bpr
 VPATH = ../
-OBJECTS= example_als_mcmc.o example_sgd example_sgd_bpr
-CFLAGS = -std=c99 -g -Wall -O0 -I../include -L../bin -I../externals/CXSparse/Include
-LDLIBS= -lfastfm -L../externals/CXSparse/Lib -lcxsparse -lblas -lm
-CC=gcc
+OBJECTS = example_als_mcmc.o example_sgd example_sgd_bpr
+CFLAGS = -std=c99 -g -Wall -O0
+LDLIBS = -L../bin -lfastfm -lpthread -lm
+CC = gcc
 
 all: $(P)
 	( cd .. ; $(MAKE) lib)
