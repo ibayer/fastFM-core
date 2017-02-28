@@ -19,6 +19,8 @@ lib: $(OBJECTS)
 	ar -x ../externals/CXSparse/Lib/libcxsparse.a
 	ar -x ../externals/OpenBLAS/libopenblas.a
 	ar rcs ../bin/libfastfm.a $(OBJECTS) *.o
+	rm -rf *.o
+	rm -rf __.SYMDEF\ SORTED
 
 cli: $(OBJECTS) cli.o
 	mkdir -p ../bin/
