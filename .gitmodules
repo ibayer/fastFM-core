@@ -5,4 +5,3 @@
 [submodule "externals/OpenBLAS"]
 	path = externals/OpenBLAS
 	url = https://github.com/xianyi/OpenBLAS.git
-	shallow = true
